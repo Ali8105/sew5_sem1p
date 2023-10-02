@@ -5,6 +5,7 @@
 – ein Logfile mit sinnvollen Angaben
 """
 from openpyxl import load_workbook
+from unicodedata import normalize
 
 __author__ = "Ali Gurbuz"
 
@@ -17,7 +18,9 @@ def read_excel_file():
 
 
 def remove_accent(user):
-    print(user[0])
-    
+    list_user = list(user)
+    list_user[0] = normalize('NFC', list_user[0])
+
+
 for i in read_excel_file():
     remove_accent(i)
