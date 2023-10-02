@@ -17,6 +17,14 @@ def read_excel_file():
         yield row
 
 
+def create_user_skript(user):
+    """
+    Erstellt das Skript fuer die Erstellung von Users
+    :param user: Zeilen vom Excel-File
+    :return:
+    """
+
+
 def remove_accent(user):
     list_user = list(user)
     list_user[0] = normalize('NFC', list_user[0])
@@ -28,8 +36,12 @@ def replace_umlaute(user):
     user[0] = user[0].replace('ö', 'oe')
     user[0] = user[0].replace('ü', 'ue')
     user[0] = user[0].replace('ß','ss')
+
+    user[0] = user[0].replace('Ä','AE')
+    user[0] = user[0].replace('Ö', 'OE')
+    user[0] = user[0].replace('Ü', 'UE')
     print(user)
 
 
 for i in read_excel_file():
-    remove_accent(i)
+    create_user_skript(i)
