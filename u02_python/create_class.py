@@ -22,5 +22,14 @@ def remove_accent(user):
     list_user[0] = normalize('NFC', list_user[0])
 
 
+def replace_umlaute(user):
+    list_user = list(user)
+    list_user[0].replace('ä','ae')
+    list_user[0].replace('ö', 'oe')
+    list_user[0].replace('ü', 'ue')
+    list_user[0].replace('ß','ss')
+
+
+
 for i in read_excel_file():
     remove_accent(i)
