@@ -8,7 +8,16 @@ from openpyxl import load_workbook
 
 __author__ = "Ali Gurbuz"
 
-workbook = load_workbook(r"Ressources/Namen.xlsx")
-worksheet = workbook[workbook.sheetnames[0]]
-for cell in worksheet["A"]:
-    print(cell.value)
+def read_excel_file():
+    workbook = load_workbook(r"../Ressources/Namen.xlsx", read_only=True)
+    worksheet = workbook[workbook.sheetnames[0]]
+
+    for row in worksheet.iter_rows(values_only=True):
+        yield row
+
+
+def remove_accent(user):
+    print(user[0])
+    
+for i in read_excel_file():
+    remove_accent(i)
