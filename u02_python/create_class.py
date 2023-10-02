@@ -4,8 +4,10 @@
 – eine Liste mit Usernamen und Passwörtern zum Verteilen an die unterrichtenden Lehrer
 – ein Logfile mit sinnvollen Angaben
 """
+from openpyxl import load_workbook
 
 __author__ = "Ali Gurbuz"
 
-with open(r"../Ressources/Namen.xlsx") as f:
-    print(f.read())
+wb = load_workbook(r"Ressources/Namen.xlsx", read_only=True)
+ws = wb[wb.sheetnames[0]]
+print(f"Worksheet names: {wb.sheetnames}")
