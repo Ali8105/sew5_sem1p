@@ -23,6 +23,7 @@ def create_user_skript(user):
     :param user: Zeilen vom Excel-File
     :return:
     """
+    
 
 
 def remove_accent(user):
