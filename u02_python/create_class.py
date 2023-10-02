@@ -20,15 +20,15 @@ def read_excel_file():
 def remove_accent(user):
     list_user = list(user)
     list_user[0] = normalize('NFC', list_user[0])
-
+    replace_umlaute(list_user)
 
 def replace_umlaute(user):
-    list_user = list(user)
-    list_user[0].replace('ä','ae')
-    list_user[0].replace('ö', 'oe')
-    list_user[0].replace('ü', 'ue')
-    list_user[0].replace('ß','ss')
 
+    user[0] = user[0].replace('ä','ae')
+    user[0] = user[0].replace('ö', 'oe')
+    user[0] = user[0].replace('ü', 'ue')
+    user[0] = user[0].replace('ß','ss')
+    print(user)
 
 
 for i in read_excel_file():
