@@ -21,11 +21,23 @@ class BritishWeight():
 
     def __add__(self, other):
         """
-        >>> print(BritishWeight(1,13) + BritishWeight(2,2))
+        >>> print(BritishWeight(1, 13) + BritishWeight(2, 2))
         4 stones 1 Pounds
 
-        >>> print(BritishWeight(1,1) + BritishWeight(2,3))
+        >>> print(BritishWeight(1, 1) + BritishWeight(2, 3))
         3 stones 4 Pounds
+
+        >>> print(BritishWeight(1, 0) + BritishWeight(0, 15))
+        2 stones 1 Pounds
+
+        >>> print(BritishWeight(0, 7) + BritishWeight(0, 7))
+        1 stones 0 Pounds
+
+        >>> print(BritishWeight(0, 0) + BritishWeight(0, 0))
+        0 stones 0 Pounds
+
+
+
 
         addiert NUR BritishWeight mit BritishWeight
         :param other: Britishweight
@@ -34,9 +46,7 @@ class BritishWeight():
         if isinstance(other, BritishWeight):
             return BritishWeight(lb=self.lb + other.lb)
         else:
-            print("BritishWeight kann nur mit BritishWeight addiert werden!")
-            exit()
-
+            raise TypeError("BritishWeight kann nur mit BritishWeight addiert werden!")
 
 
     def __str__(self):
