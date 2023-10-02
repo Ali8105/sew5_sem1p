@@ -8,6 +8,7 @@ from openpyxl import load_workbook
 
 __author__ = "Ali Gurbuz"
 
-wb = load_workbook(r"Ressources/Namen.xlsx", read_only=True)
-ws = wb[wb.sheetnames[0]]
-print(f"Worksheet names: {wb.sheetnames}")
+workbook = load_workbook(r"Ressources/Namen.xlsx")
+worksheet = workbook[workbook.sheetnames[0]]
+for cell in worksheet["A"]:
+    print(cell.value)
