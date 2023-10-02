@@ -7,4 +7,5 @@
 
 __author__ = "Ali Gurbuz"
 
-with open("\Ressources\Namen.xlsx") as f:
+with open(r"../Ressources/Namen.xlsx") as f:
+    print(f.read())
