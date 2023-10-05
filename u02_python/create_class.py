@@ -69,10 +69,8 @@ def parse_command_line_arguments():
     elif args.quiet:
         loglevel = "ERROR"
 
-    print(f"Dateiname der Eingabedatei: {eingabedatei}")
     print(f"Loglevel: {loglevel}")
 
 
 
-for i in read_excel_file():
-    parse_command_line_arguments()
+parse_command_line_arguments()
