@@ -6,6 +6,8 @@
 """
 from openpyxl import load_workbook
 from unicodedata import normalize
+import sys
+import argparse
 
 __author__ = "Ali Gurbuz"
 
@@ -41,8 +43,36 @@ def replace_umlaute(user):
     user[0] = user[0].replace('Ä','AE')
     user[0] = user[0].replace('Ö', 'OE')
     user[0] = user[0].replace('Ü', 'UE')
+    user[0] = user[0].replace(' ','_')
     print(user)
+
+def parse_command_line_arguments():
+
+    parser = argparse.ArgumentParser(description="Create Bash Scripts")
+
+    parser.add_argument("dateiname", help="Der Name der Eingabedatei")
+
+    parser.add_argument(
+        "-v", "--verbose", action="store_true", help="Mehr Log-Ausgaben aktivieren"
+    )
+    parser.add_argument(
+        "-q", "--quiet", action="store_true", help="Weniger Log-Ausgaben aktivieren"
+    )
+
+    args = parser.parse_args()
+
+    eingabedatei = args.dateiname
+
+    loglevel = "INFO"  # Standard-Loglevel
+    if args.verbose:
+        loglevel = "DEBUG"
+    elif args.quiet:
+        loglevel = "ERROR"
+
+    print(f"Dateiname der Eingabedatei: {eingabedatei}")
+    print(f"Loglevel: {loglevel}")
+
 
 
 for i in read_excel_file():
-    create_user_skript(i)
+    parse_command_line_arguments()
