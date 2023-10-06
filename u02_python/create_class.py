@@ -11,12 +11,12 @@ import argparse
 
 __author__ = "Ali Gurbuz"
 
-def read_excel_file():
-    workbook = load_workbook(r"../Ressources/Namen.xlsx", read_only=True)
+def read_excel_file(file):
+    workbook = load_workbook(file, read_only=True)
     worksheet = workbook[workbook.sheetnames[0]]
 
     for row in worksheet.iter_rows(values_only=True):
-        yield row
+        print(row[0], row[1], row[2])
 
 
 def create_user_skript(user):
@@ -70,6 +70,7 @@ def parse_command_line_arguments():
         loglevel = "ERROR"
 
     print(f"Loglevel: {loglevel}")
+    read_excel_file(eingabedatei)
 
 
 
