@@ -37,10 +37,9 @@ def create_user_skript(user):
 
 def remove_accent(user):
     list_user = list(user)
-    print(list_user[0])
     list_user[0] = normalize('NFKD', list_user[0]).encode('ASCII','ignore').decode('utf-8')
     # normalized_text = unicodedata.normalize('NFKD', text).encode('ASCII', 'ignore').decode('utf-8')
-    create_user_file(list_user)
+    create_user_file(list_user[0])
     replace_umlaute(list_user)
 
 def replace_umlaute(user):
@@ -58,11 +57,10 @@ def replace_umlaute(user):
     #print(user[0])
 
 def create_user_file(list_user):
-    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'w+') as file_user:
-        for user in list_user:
-            print(user, " das da")
-            
-            file_user.write(user)
+    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'a') as file_user:
+        print(list_user)
+        file_user.write(list_user)
+        file_user.write('\n')
 
 
 def parse_command_line_arguments():
