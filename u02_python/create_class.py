@@ -42,19 +42,25 @@ def remove_accent(user):
     create_user_file(list_user[0])
     replace_umlaute(list_user)
 
-def replace_umlaute(user):
+def replace_umlaute(list_user):
 
-    user[0] = user[0].replace('ä','ae')
-    user[0] = user[0].replace('ö', 'oe')
-    user[0] = user[0].replace('ü', 'ue')
-    user[0] = user[0].replace('ß','ss')
+    list_user[0] = list_user[0].replace('ä', 'ae')
+    list_user[0] = list_user[0].replace('ö', 'oe')
+    list_user[0] = list_user[0].replace('ü', 'ue')
+    list_user[0] = list_user[0].replace('ß', 'ss')
 
-    user[0] = user[0].replace('Ä','AE')
-    user[0] = user[0].replace('Ö', 'OE')
-    user[0] = user[0].replace('Ü', 'UE')
-    user[0] = user[0].replace(' ','_')
-    user[0] = user[0].replace('\'',('_'))
+    list_user[0] = list_user[0].replace('Ä', 'AE')
+    list_user[0] = list_user[0].replace('Ö', 'OE')
+    list_user[0] = list_user[0].replace('Ü', 'UE')
+    list_user[0] = list_user[0].replace(' ', '_')
+    list_user[0] = list_user[0].replace('\'', ('_'))
+    username(list_user)
     #print(user[0])
+
+
+def username(list_user):
+    for user in list_user:
+        print(user)
 
 def create_user_file(list_user):
     with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'a') as file_user:

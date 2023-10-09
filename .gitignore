@@ -161,3 +161,6 @@ cython_debug/
 /Ressources/Klassenraeume_2023.xlsx
 /Ressources/Namen.xlsx
 /Ressources/user_list.txt
+/Ressources/
+/Ressources/*
+
