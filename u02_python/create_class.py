@@ -22,7 +22,6 @@ def read_excel_file(file):
     """
     workbook = load_workbook(file, read_only=True)
     worksheet = workbook[workbook.sheetnames[0]]
-    # create_user_file(list_user[0])
     for row in worksheet.iter_rows(values_only=True):
         replace_umlaute(row)
 
@@ -65,9 +64,10 @@ def username(list_user):
         print(user)
 
 def create_user_file(list_user):
-    # damit die einträge vom letzten mal weggehen 
+    # damit die einträge vom letzten mal weggehen
     with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'w') as file_user:
         file_user.write("")
+        pass
 
     # damit Append
     with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'a') as file_user:
