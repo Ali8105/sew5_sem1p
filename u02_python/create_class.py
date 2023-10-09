@@ -43,7 +43,6 @@ def remove_accent(user):
     list_user[0] = ''.join(c for c in normalize('NFD', list_user[0]) if unicodedata.category(c) != 'Mn' and c.isalnum())
     # normalized_text = unicodedata.normalize('NFKD', text).encode('ASCII', 'ignore').decode('utf-8')
     print(list_user[0])
-#    replace_umlaute(list_user)
 
 def replace_umlaute(list_user):
     list_user = list(list_user)
@@ -66,8 +65,14 @@ def username(list_user):
         print(user)
 
 def create_user_file(list_user):
+    # damit die einträge vom letzten mal weggehen 
+    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'w') as file_user:
+        file_user.write("")
+
+    # damit Append
     with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'a') as file_user:
        # print(list_user)
+        file_user.flush()
         file_user.write(list_user)
         file_user.write('\n')
 
