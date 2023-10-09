@@ -5,6 +5,7 @@
 – ein Logfile mit sinnvollen Angaben
 """
 import os
+import unicodedata
 
 from openpyxl import load_workbook
 from unicodedata import normalize
@@ -21,9 +22,9 @@ def read_excel_file(file):
     """
     workbook = load_workbook(file, read_only=True)
     worksheet = workbook[workbook.sheetnames[0]]
-
+    # create_user_file(list_user[0])
     for row in worksheet.iter_rows(values_only=True):
-        remove_accent(row)
+        replace_umlaute(row)
 
 
 def create_user_skript(user):
@@ -37,13 +38,15 @@ def create_user_skript(user):
 
 def remove_accent(user):
     list_user = list(user)
-    list_user[0] = normalize('NFKD', list_user[0]).encode('ASCII','ignore').decode('utf-8')
+    # list_user[0] = normalize('NFKD', list_user[0]).encode('ASCII','ignore').decode('utf-8')
+    # list_user[0] = normalize('NFD', list_user[0]).encode('ASCII','ignore').decode('utf-8')
+    list_user[0] = ''.join(c for c in normalize('NFD', list_user[0]) if unicodedata.category(c) != 'Mn' and c.isalnum())
     # normalized_text = unicodedata.normalize('NFKD', text).encode('ASCII', 'ignore').decode('utf-8')
-    create_user_file(list_user[0])
-    replace_umlaute(list_user)
+    print(list_user[0])
+#    replace_umlaute(list_user)
 
 def replace_umlaute(list_user):
-
+    list_user = list(list_user)
     list_user[0] = list_user[0].replace('ä', 'ae')
     list_user[0] = list_user[0].replace('ö', 'oe')
     list_user[0] = list_user[0].replace('ü', 'ue')
@@ -54,8 +57,8 @@ def replace_umlaute(list_user):
     list_user[0] = list_user[0].replace('Ü', 'UE')
     list_user[0] = list_user[0].replace(' ', '_')
     list_user[0] = list_user[0].replace('\'', ('_'))
-    username(list_user)
-    #print(user[0])
+    remove_accent(list_user)
+
 
 
 def username(list_user):
@@ -64,7 +67,7 @@ def username(list_user):
 
 def create_user_file(list_user):
     with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'a') as file_user:
-        print(list_user)
+       # print(list_user)
         file_user.write(list_user)
         file_user.write('\n')
 
