@@ -4,6 +4,8 @@
 – eine Liste mit Usernamen und Passwörtern zum Verteilen an die unterrichtenden Lehrer
 – ein Logfile mit sinnvollen Angaben
 """
+import os
+
 from openpyxl import load_workbook
 from unicodedata import normalize
 import sys
@@ -38,6 +40,7 @@ def remove_accent(user):
     print(list_user[0])
     list_user[0] = normalize('NFKD', list_user[0]).encode('ASCII','ignore').decode('utf-8')
     # normalized_text = unicodedata.normalize('NFKD', text).encode('ASCII', 'ignore').decode('utf-8')
+    create_user_file(list_user)
     replace_umlaute(list_user)
 
 def replace_umlaute(user):
@@ -52,7 +55,15 @@ def replace_umlaute(user):
     user[0] = user[0].replace('Ü', 'UE')
     user[0] = user[0].replace(' ','_')
     user[0] = user[0].replace('\'',('_'))
-    print(user[0])
+    #print(user[0])
+
+def create_user_file(list_user):
+    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'w+') as file_user:
+        for user in list_user:
+            print(user, " das da")
+            
+            file_user.write(user)
+
 
 def parse_command_line_arguments():
 
