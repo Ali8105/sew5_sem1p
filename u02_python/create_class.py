@@ -12,11 +12,16 @@ import argparse
 __author__ = "Ali Gurbuz"
 
 def read_excel_file(file):
+    """
+
+    :param file: Path zum File
+    :return:
+    """
     workbook = load_workbook(file, read_only=True)
     worksheet = workbook[workbook.sheetnames[0]]
 
     for row in worksheet.iter_rows(values_only=True):
-        print(row[0], row[1], row[2])
+        remove_accent(row)
 
 
 def create_user_skript(user):
@@ -30,7 +35,9 @@ def create_user_skript(user):
 
 def remove_accent(user):
     list_user = list(user)
-    list_user[0] = normalize('NFC', list_user[0])
+    print(list_user[0])
+    list_user[0] = normalize('NFKD', list_user[0]).encode('ASCII','ignore').decode('utf-8')
+    # normalized_text = unicodedata.normalize('NFKD', text).encode('ASCII', 'ignore').decode('utf-8')
     replace_umlaute(list_user)
 
 def replace_umlaute(user):
@@ -44,7 +51,8 @@ def replace_umlaute(user):
     user[0] = user[0].replace('Ö', 'OE')
     user[0] = user[0].replace('Ü', 'UE')
     user[0] = user[0].replace(' ','_')
-    print(user)
+    user[0] = user[0].replace('\'',('_'))
+    print(user[0])
 
 def parse_command_line_arguments():
 
