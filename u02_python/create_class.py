@@ -37,15 +37,12 @@ def create_user_skript(list_user):
     :param user: Zeilen vom Excel-File
     :return:
     """
-    print("a")
 
-    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/script_user.sh", 'w') as scripte_user:
-       # print(list_user)
+    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/script_user.sh", 'w', encoding='utf-8') as scripte_user:
         scripte_user.write("#!/bin/bash")
-        #for user in list_user:
-        #    scripte_user.write(user)
-        #    scripte_user.write('\n')
-
+        for user in list_user:
+            scripte_user.write(user[0])
+            scripte_user.write("\n")
 
 def replace_umlaute(list_user):
     for i in range(len(list_user)):
