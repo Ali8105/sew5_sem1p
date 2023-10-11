@@ -46,15 +46,6 @@ def create_user_skript(list_user):
         #    scripte_user.write(user)
         #    scripte_user.write('\n')
 
-    
-
-
-def remove_accent(list_user):
-    # list_user[0] = normalize('NFKD', list_user[0]).encode('ASCII','ignore').decode('utf-8')
-    # list_user[0] = normalize('NFD', list_user[0]).encode('ASCII','ignore').decode('utf-8')
-    list_user[0] = ''.join(c for c in normalize('NFD', list_user[0]) if unicodedata.category(c) != 'Mn' and c.isalnum())
-    # normalized_text = unicodedata.normalize('NFKD', text).encode('ASCII', 'ignore').decode('utf-8')
-    create_user_skript(list_user)
 
 def replace_umlaute(list_user):
     for i in range(len(list_user)):
@@ -68,8 +59,14 @@ def replace_umlaute(list_user):
         list_user[i][0] = list_user[i][0].replace('Ü', 'UE')
         list_user[i][0] = list_user[i][0].replace(' ', '_')
         list_user[i][0] = list_user[i][0].replace('\'', ('_'))
-    print(list_user)
-    #remove_accent(list_user)
+    remove_accent(list_user)
+
+
+def remove_accent(list_user):
+    for i in range(len(list_user)):
+        list_user[i][0] = ''.join(c for c in normalize('NFD', list_user[i][0]) if unicodedata.category(c) != 'Mn' and c.isalnum())
+    create_user_skript(list_user)
+
 
 
 
