@@ -32,33 +32,37 @@ def read_excel_file(file):
             continue
         rows.append(row)
     # Tupples die in der Liste drinnen waren wurden zur liste umgewandelt --> damit man später die Werte bearbeiten kann
-    list_users = [list(item) for item in rows]
-    replace_umlaute(list_users)
 
 
-def create_user_skript(list_user):
+    create_user_skript(rows)
+
+
+def create_user_skript(rows):
     """
     Erstellt das Skript fuer die Erstellung von Users
     :param user: Zeilen vom Excel-File
     :return:
     """
-
+    list_user = [list(item) for item in rows]
+    list_user = replace_umlaute(list_user)
+    list_user = remove_accent(list_user)
     with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/script_user.sh", 'w', encoding='utf-8') as scripte_user:
         scripte_user.write("#!/bin/bash")
 
-        for user in list_user:
-            if user[3] is not None:
+        for i in range (len(list_user)):
+            if list_user[i][3] is not None:
                 scripte_user.write("\n")
-                home_directory = "/home/klassen/k" + user[3].lower()
+                home_directory = "/home/klassen/k" + list_user[i][3].lower()
                 # Define the set of characters for Z and R
                 z_and_r_characters = "!%&(),._-=^#"
 
                 # Generate Z and R characters randomly
                 z_character = random.choice(z_and_r_characters)
 
-                pswd = user[3].lower()  + z_character + "keinAhnung" + z_character + "keineAhnung" + z_character
-                scripte_user.write(f"sudo useradd -d {home_directory} -g users -G cdrom,plugdev,sambashare -k /etc/{user[0]} -m -s /bin/bash {user[0]} \n")
-                scripte_user.write(f"echo '{user[0]}:{pswd}' | sudo chpasswd")
+                pswd = list_user[i][3].lower()  + z_character + "keinAhnung" + z_character + "keineAhnung" + z_character
+                create_user_file(rows[i][0],rows[i][1],pswd)
+                scripte_user.write(f"sudo useradd -d {home_directory} -g users -G cdrom,plugdev,sambashare -k /etc/{list_user[i][0]} -m -s /bin/bash {list_user[i][0]} \n")
+                scripte_user.write(f"echo '{list_user[i][0]}:{pswd}' | sudo chpasswd")
 
 
 def replace_umlaute(list_user):
@@ -73,33 +77,19 @@ def replace_umlaute(list_user):
         list_user[i][0] = list_user[i][0].replace('Ü', 'UE')
         list_user[i][0] = list_user[i][0].replace(' ', '_')
         list_user[i][0] = list_user[i][0].replace('\'', ('_'))
-    remove_accent(list_user)
-
+    return list_user
 
 def remove_accent(list_user):
     for i in range(len(list_user)):
         list_user[i][0] = ''.join(c for c in normalize('NFD', list_user[i][0]) if unicodedata.category(c) != 'Mn' and c.isalnum())
-    create_user_skript(list_user)
+    return list_user
 
 
-
-
-def username(list_user):
-    for user in list_user:
-        print(user)
-
-def create_user_file(list_user):
+def create_user_file(vorname, nachname, pswd):
     # damit die einträge vom letzten mal weggehen
-    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'w') as file_user:
-        file_user.write("")
-        pass
+    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'a', encoding="utf-8") as file_user:
+        file_user.write(f"Vorname: {vorname} Nachname: {nachname} Passwort: {pswd} \n")
 
-    # damit Append
-    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'a') as file_user:
-       # print(list_user)
-        file_user.flush()
-        file_user.write(list_user)
-        file_user.write('\n')
 
 
 def parse_command_line_arguments():
