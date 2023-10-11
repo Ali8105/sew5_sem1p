@@ -36,9 +36,10 @@ def create_user_skript(list_user):
     with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/script_user.sh", 'a') as scripte_user:
        # print(list_user)
         scripte_user.flush()
-       
-        scripte_user.write(list_user)
-        scripte_user.write('\n')
+        scripte_user.write("#!/bin/bash")
+        for user in list_user:
+            scripte_user.write(list_user)
+            scripte_user.write('\n')
 
     
 
