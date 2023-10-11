@@ -26,8 +26,8 @@ def read_excel_file(file):
     rows = list()
     for row in worksheet.iter_rows(values_only=True):
         rows.append(row)
-    print(rows)
-    print(type(rows))
+    # Tupples die in der Liste drinnen waren wurden zur liste umgewandelt --> damit man später die Werte bearbeiten kann
+    list_users = [list(item) for item in rows]
     replace_umlaute(rows)
 
 
@@ -49,8 +49,7 @@ def create_user_skript(list_user):
     
 
 
-def remove_accent(user):
-    list_user = list(user)
+def remove_accent(list_user):
     # list_user[0] = normalize('NFKD', list_user[0]).encode('ASCII','ignore').decode('utf-8')
     # list_user[0] = normalize('NFD', list_user[0]).encode('ASCII','ignore').decode('utf-8')
     list_user[0] = ''.join(c for c in normalize('NFD', list_user[0]) if unicodedata.category(c) != 'Mn' and c.isalnum())
@@ -59,16 +58,17 @@ def remove_accent(user):
 
 def replace_umlaute(list_user):
     list_user = list(list_user)
-    list_user[0] = list_user[0].replace('ä', 'ae')
-    list_user[0] = list_user[0].replace('ö', 'oe')
-    list_user[0] = list_user[0].replace('ü', 'ue')
-    list_user[0] = list_user[0].replace('ß', 'ss')
+    list_user[0][0] = list_user[0][0].replace('ä', 'ae')
+    list_user[0][0] = list_user[0][0].replace('ö', 'oe')
+    list_user[0][0] = list_user[0][0].replace('ü', 'ue')
+    list_user[0][0] = list_user[0][0].replace('ß', 'ss')
 
-    list_user[0] = list_user[0].replace('Ä', 'AE')
-    list_user[0] = list_user[0].replace('Ö', 'OE')
-    list_user[0] = list_user[0].replace('Ü', 'UE')
-    list_user[0] = list_user[0].replace(' ', '_')
-    list_user[0] = list_user[0].replace('\'', ('_'))
+    list_user[0][0] = list_user[0][0].replace('Ä', 'AE')
+    list_user[0][0] = list_user[0][0].replace('Ö', 'OE')
+    list_user[0][0] = list_user[0][0].replace('Ü', 'UE')
+    list_user[0][0] = list_user[0][0].replace(' ', '_')
+    list_user[0][0] = list_user[0][0].replace('\'', ('_'))
+    print(list_user)
     remove_accent(list_user)
 
 
