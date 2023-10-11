@@ -28,7 +28,7 @@ def read_excel_file(file):
         rows.append(row)
     # Tupples die in der Liste drinnen waren wurden zur liste umgewandelt --> damit man später die Werte bearbeiten kann
     list_users = [list(item) for item in rows]
-    replace_umlaute(rows)
+    replace_umlaute(list_users)
 
 
 def create_user_skript(list_user):
@@ -57,19 +57,19 @@ def remove_accent(list_user):
     create_user_skript(list_user)
 
 def replace_umlaute(list_user):
-    list_user = list(list_user)
-    list_user[0][0] = list_user[0][0].replace('ä', 'ae')
-    list_user[0][0] = list_user[0][0].replace('ö', 'oe')
-    list_user[0][0] = list_user[0][0].replace('ü', 'ue')
-    list_user[0][0] = list_user[0][0].replace('ß', 'ss')
+    for i in range(len(list_user)):
+        list_user[i][0] = list_user[i][0].replace('ä', 'ae')
+        list_user[i][0] = list_user[i][0].replace('ö', 'oe')
+        list_user[i][0] = list_user[i][0].replace('ü', 'ue')
+        list_user[i][0] = list_user[i][0].replace('ß', 'ss')
 
-    list_user[0][0] = list_user[0][0].replace('Ä', 'AE')
-    list_user[0][0] = list_user[0][0].replace('Ö', 'OE')
-    list_user[0][0] = list_user[0][0].replace('Ü', 'UE')
-    list_user[0][0] = list_user[0][0].replace(' ', '_')
-    list_user[0][0] = list_user[0][0].replace('\'', ('_'))
+        list_user[i][0] = list_user[i][0].replace('Ä', 'AE')
+        list_user[i][0] = list_user[i][0].replace('Ö', 'OE')
+        list_user[i][0] = list_user[i][0].replace('Ü', 'UE')
+        list_user[i][0] = list_user[i][0].replace(' ', '_')
+        list_user[i][0] = list_user[i][0].replace('\'', ('_'))
     print(list_user)
-    remove_accent(list_user)
+    #remove_accent(list_user)
 
 
 
