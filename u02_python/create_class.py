@@ -31,11 +31,14 @@ def read_excel_file(file):
             first_row = False
             continue
         rows.append(row)
-    # Tupples die in der Liste drinnen waren wurden zur liste umgewandelt --> damit man später die Werte bearbeiten kann
 
-
+    # only for deleting the content of list_user
+    clear_list_user()
     create_user_skript(rows)
 
+def clear_list_user():
+    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'w', encoding="utf-8") as file_user:
+        file_user.write(" ")
 
 def create_user_skript(rows):
     """
