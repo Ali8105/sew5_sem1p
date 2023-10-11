@@ -24,7 +24,11 @@ def read_excel_file(file):
     workbook = load_workbook(file, read_only=True)
     worksheet = workbook[workbook.sheetnames[0]]
     rows = list()
+    first_row = True
     for row in worksheet.iter_rows(values_only=True):
+        if first_row:
+            first_row = False
+            continue
         rows.append(row)
     # Tupples die in der Liste drinnen waren wurden zur liste umgewandelt --> damit man später die Werte bearbeiten kann
     list_users = [list(item) for item in rows]
@@ -40,9 +44,13 @@ def create_user_skript(list_user):
 
     with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/script_user.sh", 'w', encoding='utf-8') as scripte_user:
         scripte_user.write("#!/bin/bash")
+
         for user in list_user:
-            scripte_user.write(user[0])
-            scripte_user.write("\n")
+            if user[3] is not None:
+                scripte_user.write("\n")
+                home_directory = "/home/klassen/k" + user[3].lower()
+                scripte_user.write(f"sudo useradd -d {home_directory} -g users -G cdrom,plugdev,sambashare -k /etc/{user[0]} -m -s /bin/bash {user[0]}")
+
 
 def replace_umlaute(list_user):
     for i in range(len(list_user)):
