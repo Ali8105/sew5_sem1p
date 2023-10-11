@@ -11,6 +11,7 @@ from openpyxl import load_workbook
 from unicodedata import normalize
 import sys
 import argparse
+import numpy
 
 __author__ = "Ali Gurbuz"
 
@@ -22,8 +23,12 @@ def read_excel_file(file):
     """
     workbook = load_workbook(file, read_only=True)
     worksheet = workbook[workbook.sheetnames[0]]
+    rows = list()
     for row in worksheet.iter_rows(values_only=True):
-        replace_umlaute(row)
+        rows.append(row)
+    print(rows)
+    print(type(rows))
+    replace_umlaute(rows)
 
 
 def create_user_skript(list_user):
@@ -32,14 +37,14 @@ def create_user_skript(list_user):
     :param user: Zeilen vom Excel-File
     :return:
     """
+    print("a")
 
-    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/script_user.sh", 'a') as scripte_user:
+    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/script_user.sh", 'w') as scripte_user:
        # print(list_user)
-        scripte_user.flush()
         scripte_user.write("#!/bin/bash")
-        for user in list_user:
-            scripte_user.write(list_user[0])
-            scripte_user.write('\n')
+        #for user in list_user:
+        #    scripte_user.write(user)
+        #    scripte_user.write('\n')
 
     
 
