@@ -26,12 +26,20 @@ def read_excel_file(file):
         replace_umlaute(row)
 
 
-def create_user_skript(user):
+def create_user_skript(list_user):
     """
     Erstellt das Skript fuer die Erstellung von Users
     :param user: Zeilen vom Excel-File
     :return:
     """
+
+    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/script_user.sh", 'a') as scripte_user:
+       # print(list_user)
+        scripte_user.flush()
+       
+        scripte_user.write(list_user)
+        scripte_user.write('\n')
+
     
 
 
