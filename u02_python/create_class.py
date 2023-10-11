@@ -38,7 +38,7 @@ def create_user_skript(list_user):
         scripte_user.flush()
         scripte_user.write("#!/bin/bash")
         for user in list_user:
-            scripte_user.write(list_user)
+            scripte_user.write(list_user[0])
             scripte_user.write('\n')
 
     
@@ -50,7 +50,7 @@ def remove_accent(user):
     # list_user[0] = normalize('NFD', list_user[0]).encode('ASCII','ignore').decode('utf-8')
     list_user[0] = ''.join(c for c in normalize('NFD', list_user[0]) if unicodedata.category(c) != 'Mn' and c.isalnum())
     # normalized_text = unicodedata.normalize('NFKD', text).encode('ASCII', 'ignore').decode('utf-8')
-    print(list_user[0])
+    create_user_skript(list_user)
 
 def replace_umlaute(list_user):
     list_user = list(list_user)
