@@ -5,6 +5,7 @@
 – ein Logfile mit sinnvollen Angaben
 """
 import os
+import random
 import unicodedata
 
 from openpyxl import load_workbook
@@ -49,7 +50,15 @@ def create_user_skript(list_user):
             if user[3] is not None:
                 scripte_user.write("\n")
                 home_directory = "/home/klassen/k" + user[3].lower()
-                scripte_user.write(f"sudo useradd -d {home_directory} -g users -G cdrom,plugdev,sambashare -k /etc/{user[0]} -m -s /bin/bash {user[0]}")
+                # Define the set of characters for Z and R
+                z_and_r_characters = "!%&(),._-=^#"
+
+                # Generate Z and R characters randomly
+                z_character = random.choice(z_and_r_characters)
+
+                pswd = user[3].lower()  + z_character + "keinAhnung" + z_character + "keineAhnung" + z_character
+                scripte_user.write(f"sudo useradd -d {home_directory} -g users -G cdrom,plugdev,sambashare -k /etc/{user[0]} -m -s /bin/bash {user[0]} \n")
+                scripte_user.write(f"echo '{user[0]}:{pswd}' | sudo chpasswd")
 
 
 def replace_umlaute(list_user):
