@@ -55,12 +55,11 @@ def create_user_skript(rows):
         for i in range (len(list_user)):
             if list_user[i][3] is not None:
                 scripte_user.write("\n")
-                home_directory = "/home/klassen/k" + list_user[i][3].lower()
-                # Define the set of characters for Z and R
-                z_and_r_characters = "!%&(),._-=^#"
+                home_directory = "/home/klassen/" + list_user[i][3].lower()
 
-                # Generate Z and R characters randomly
-                z_character = random.choice(z_and_r_characters)
+
+                random_characters = "!%&(),._-=^#"
+                z_character = random.choice(random_characters)
 
                 pswd = list_user[i][3].lower()  + z_character + "keinAhnung" + z_character + "keineAhnung" + z_character
                 create_user_file(rows[i][0],rows[i][1],pswd)
@@ -93,6 +92,10 @@ def create_user_file(vorname, nachname, pswd):
     with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'a', encoding="utf-8") as file_user:
         file_user.write(f"Vorname: {vorname} Nachname: {nachname} Passwort: {pswd} \n")
 
+
+def userdel(user):
+    with open(r"Ressources\delete_classh.sh", "a") as f:
+        f.write(f"userdel {user[0]} && rm -rf /home/klassen/{user[0]}")
 
 
 def parse_command_line_arguments():
