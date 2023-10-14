@@ -50,11 +50,12 @@ def create_user_skript(rows):
     list_user = replace_umlaute(list_user)
     list_user = remove_accent(list_user)
     with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/script_user.sh", 'w', encoding='utf-8') as scripte_user:
-        scripte_user.write("#!/bin/bash")
+        scripte_user.write("#!/bin/bash \n")
 
         for i in range (len(list_user)):
             if list_user[i][3] is not None:
-                scripte_user.write("\n")
+                userdel(list_user)
+
                 home_directory = "/home/klassen/" + list_user[i][3].lower()
 
 
@@ -64,7 +65,7 @@ def create_user_skript(rows):
                 pswd = list_user[i][3].lower()  + z_character + "keinAhnung" + z_character + "keineAhnung" + z_character
                 create_user_file(rows[i][0],rows[i][1],pswd)
                 scripte_user.write(f"sudo useradd -d {home_directory} -g users -G cdrom,plugdev,sambashare -k /etc/{list_user[i][0]} -m -s /bin/bash {list_user[i][0]} \n")
-                scripte_user.write(f"echo '{list_user[i][0]}:{pswd}' | sudo chpasswd")
+                scripte_user.write(f"echo '{list_user[i][0]}:{pswd}' | sudo chpasswd \n")
 
 
 def replace_umlaute(list_user):
@@ -94,8 +95,11 @@ def create_user_file(vorname, nachname, pswd):
 
 
 def userdel(user):
-    with open(r"Ressources\delete_classh.sh", "a") as f:
-        f.write(f"userdel {user[0]} && rm -rf /home/klassen/{user[0]}")
+    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "w", encoding="utf-8") as file:
+        file.write("#!/bin/bash \n")
+        for i in range (len(user)):
+            file.write(f"userdel {user[i][0]} && rm -rf /home/klassen/{user[i][0]} \n")
+
 
 
 def parse_command_line_arguments():
