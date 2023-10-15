@@ -2,6 +2,19 @@ import argparse
 import logging
 import unicodedata
 from collections import namedtuple
+from logging.handlers import RotatingFileHandler
+
+from openpyxl import load_workbook
+
+def generate_scripts():
+    with open("res/create_user.sh", "w") as file:
+        logger.debug("opened file " + file.name)
+        print("set -e", file=file)
+    with open("res/delete_user.sh", "w") as file:
+        logger.debug("opened file " + file.name)
+        print("set -x", file=file)
+    open("res/passwords_user", "w").close()
+    users = dict()
 
 
 def remove_accent(txt):
@@ -32,3 +45,25 @@ if '__main__' == __name__:
     rotating_file_handler = RotatingFileHandler("res/logs/create_user.log", maxBytes=10000, backupCount=5)
     rotating_file_handler.setFormatter(formatter)
     logger.addHandler(rotating_file_handler)
+
+
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(formatter)
+    logger.addHandler(stream_handler)
+
+
+    logger.setLevel(logging.DEBUG)
+
+    if args.verbose:
+        stream_handler.setLevel(logging.DEBUG)
+    elif args.quiet:
+        stream_handler.setLevel(logging.CRITICAL)
+    else:
+        stream_handler.setLevel(logging.INFO)
+
+    try:
+        wb = load_workbook(args.file, read_only=True)
+        ws = wb[wb.sheetnames[0]]
+        generate_scripts()
+    except FileNotFoundError:
+        logger.critical("couldnt find file")
