@@ -33,6 +33,17 @@ def get_user():
         yield klasse, raum, kv
 
 
+def useradd():
+    return 0
+
+def userdel(user):
+    return 0
+
+def addpasswd():
+    return 0
+
+
+
 if '__main__' == __name__:
     parser = argparse.ArgumentParser()
     output_group = parser.add_mutually_exclusive_group()
