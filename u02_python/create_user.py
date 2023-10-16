@@ -38,11 +38,18 @@ def get_user():
 
 
 def useradd(user, pwd):
-    return 0
+    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\script_user.sh", "a") as file:
+        logger.debug("opened file " + file.name)
+        file.write(f'useradd -d "/home/{user.login_name}" -c "{user.vname + " " + user.nname}" -m ' \
+             f'-g {user.group}{"," + user.u_class if user.group == "student" else ""} -s "/bin/bash {user.login_name}" ')
 
 def userdel(user):
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_user.sh", "a") as file:
-        file.write("KA")
+        logger.debug("opened file " + file.name)
+        delete = f'userdel {user.login_name} && rm -rf /home/klassen/{user.login_name}'
+        file.write(delete)
+        logger.info("wrote userdel into " + file.name)
+
 
 def addpasswd(user, pwd):
     return 0

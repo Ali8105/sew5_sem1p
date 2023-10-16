@@ -58,7 +58,7 @@ class BritishWeight():
 
 
 if __name__ == '__main__':
+    b = BritishWeight(13,13)
+    c = BritishWeight(st=1)
+    print(b+c)
     doctest.testmod(verbose=True)
-
-
-
