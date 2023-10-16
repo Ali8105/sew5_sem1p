@@ -4,7 +4,7 @@ __author__ = "Ali Gurbuz"
 class BritishWeight():
 
     """
-    Variable nur in Pounds abzuspeichern
+    Variable um nur in Pounds abzuspeichern
     """
     lb = 0
 
