@@ -41,7 +41,8 @@ def useradd(user, pwd):
     return 0
 
 def userdel(user):
-    return 0
+    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_user.sh", "a") as file:
+        file.write("KA")
 
 def addpasswd(user, pwd):
     return 0
