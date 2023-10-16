@@ -28,7 +28,13 @@ def remove_accent(txt):
 def get_user():
     User = namedtuple("User", "vmnam nname group u_class login_name")
     for row in ws.iter_rows(min_row=2):
-        print("sd")
+        firstname = remove_accent(str(row[0].value).lower())
+        lastname = remove_accent(str(row[1].value).lower())
+        group = str(row[2].value)
+        u_class = str(row[3].value)
+        user = User(firstname, lastname, group, u_class, "")
+        yield user
+
 
 
 def useradd(user, pwd):
