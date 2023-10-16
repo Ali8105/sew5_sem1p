@@ -37,8 +37,6 @@ class BritishWeight():
         0 stones 0 Pounds
 
 
-
-
         addiert NUR BritishWeight mit BritishWeight
         :param other: Britishweight
         :return: Ergebnis
@@ -50,10 +48,18 @@ class BritishWeight():
 
 
     def __str__(self):
+        """
+        Überschreibt die String Methode
+        :return:  x Stones y Pounds
+        """
         return str (self.stones) + " stones " +  str(self.lb%14) + " Pounds"
 
     @property
     def stones(self):
+        """
+        Die Anzahl der Stones
+        :return: Stones
+        """
         return self.lb // 14
 
 
