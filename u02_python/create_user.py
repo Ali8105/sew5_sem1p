@@ -26,7 +26,11 @@ def remove_accent(txt):
 
 
 def get_user():
-    User = namedtuple("User", "vnmane nname group u_class login_name")
+    for row in ws.iter_rows(min_row=2):
+        klasse = str(row[0].value).lower()
+        raum = str(row[1].value)
+        kv = str(row[2].value)
+        yield klasse, raum, kv
 
 
 if '__main__' == __name__:
