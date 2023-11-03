@@ -1,5 +1,6 @@
 import argparse
 import logging
+import random
 import re
 import string
 import unicodedata
@@ -10,8 +11,10 @@ from openpyxl import load_workbook
 
 
 def generate_password():
+    # toDo
     pas_char = string.ascii_letters + "!%&(),._-=^#!%&(),._-=^#"
-
+    logger.debug("generate password")
+    return ''.join(random.choice(pas_char) for _ in range(10))
 
 
 def generate_scripts():
