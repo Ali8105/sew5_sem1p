@@ -7,7 +7,7 @@
 import os
 import random
 import unicodedata
-
+import logging
 from openpyxl import load_workbook
 from unicodedata import normalize
 import sys
@@ -107,18 +107,14 @@ def userdel(user):
 
 def parse_command_line_arguments():
 
-    parser = argparse.ArgumentParser(description="Create Bash Scripts")
-
-    parser.add_argument("dateiname", help="Der Name der Eingabedatei")
-
-    parser.add_argument(
-        "-v", "--verbose", action="store_true", help="Mehr Log-Ausgaben aktivieren"
-    )
-    parser.add_argument(
-        "-q", "--quiet", action="store_true", help="Weniger Log-Ausgaben aktivieren"
-    )
-
+    parser = argparse.ArgumentParser()
+    output_group = parser.add_mutually_exclusive_group()
+    output_group.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
+    output_group.add_argument("-q", "--quiet", help="decrease output verbosity", action="store_true")
+    parser.add_argument("file", help="file with the userdata")
     args = parser.parse_args()
+
+    logger = logging.getLogger()
 
     eingabedatei = args.dateiname
 
