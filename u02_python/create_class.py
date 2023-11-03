@@ -17,7 +17,10 @@ import argparse
 __author__ = "Ali Gurbuz"
 
 def generate_password(user):
-    return "null"
+    special_chars = "!%&(),._-=^#!%&(),._-=^#"
+    logger.debug("generated password")
+    return f'{user[0]}{random.choice(special_chars)}{user[1]}' \
+           f'{random.choice(special_chars)}{user[2]}'
 
 def get_user():
     for row in ws.iter_rows(min_row=2):
@@ -51,14 +54,19 @@ def create_user_entry(user, pwd):
 
 
 def useradd(user, pwd):
+    return 0
+
 
 def addpasswd(user, pwd):
-    def userdel(user):
-        with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "w",
-                  encoding="utf-8") as file:
-            file.write("#!/bin/bash \n")
-            for i in range(len(user)):
-                file.write(f"userdel {user[i][0]} && rm -rf /home/klassen/{user[i][0]} \n")
+    return 0
+
+
+def userdel(user):
+    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "w",
+              encoding="utf-8") as file:
+        file.write("#!/bin/bash \n")
+        for i in range(len(user)):
+            file.write(f"userdel {user[i][0]} && rm -rf /home/klassen/{user[i][0]} \n")
 
 
 def replace_umlaute(list_user):
