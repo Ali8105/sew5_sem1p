@@ -64,8 +64,10 @@ def useradd(user, pwd):
 
 
 def addpasswd(user, pwd):
-    return 0
-
+    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_class", "a") as file:
+        logger.debug("opened file " + file.name)
+        print(user[0], pwd, file=file, sep=":")
+        logger.info("wrote password into file for user in " + file.name)
 
 def userdel(user):
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "w",
@@ -74,25 +76,6 @@ def userdel(user):
         for i in range(len(user)):
             file.write(f"userdel {user[i][0]} && rm -rf /home/klassen/{user[i][0]} \n")
 
-
-def replace_umlaute(list_user):
-    for i in range(len(list_user)):
-        list_user[i][0] = list_user[i][0].replace('ä', 'ae')
-        list_user[i][0] = list_user[i][0].replace('ö', 'oe')
-        list_user[i][0] = list_user[i][0].replace('ü', 'ue')
-        list_user[i][0] = list_user[i][0].replace('ß', 'ss')
-
-        list_user[i][0] = list_user[i][0].replace('Ä', 'AE')
-        list_user[i][0] = list_user[i][0].replace('Ö', 'OE')
-        list_user[i][0] = list_user[i][0].replace('Ü', 'UE')
-        list_user[i][0] = list_user[i][0].replace(' ', '_')
-        list_user[i][0] = list_user[i][0].replace('\'', ('_'))
-    return list_user
-
-def remove_accent(list_user):
-    for i in range(len(list_user)):
-        list_user[i][0] = ''.join(c for c in normalize('NFD', list_user[i][0]) if unicodedata.category(c) != 'Mn' and c.isalnum())
-    return list_user
 
 
 def create_user_file(vorname, nachname, pswd):
