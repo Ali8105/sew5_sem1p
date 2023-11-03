@@ -8,6 +8,8 @@ import os
 import random
 import unicodedata
 import logging
+from logging.handlers import RotatingFileHandler
+
 from openpyxl import load_workbook
 from unicodedata import normalize
 import sys
@@ -116,13 +118,24 @@ def parse_command_line_arguments():
 
     logger = logging.getLogger()
 
-    eingabedatei = args.dateiname
+    formatter = logging.Formatter("%(asctime)s; %(levelname)s; %(message)s",
+                                  "%Y-%m-%d %H:%M:%S")
 
-    loglevel = "INFO"  # Standard-Loglevel
+    rotating_file_handler = RotatingFileHandler("res/create_class.log", maxBytes=10000, backupCount=5)
+    rotating_file_handler.setFormatter(formatter)
+    logger.addHandler(rotating_file_handler)
+
+    stream_handler = logging.StreamHandler(sys.stderr)
+    stream_handler.setFormatter(formatter)
+    logger.addHandler(stream_handler)
+
     if args.verbose:
-        loglevel = "DEBUG"
+        stream_handler.setLevel(logging.DEBUG)
     elif args.quiet:
-        loglevel = "ERROR"
+        stream_handler.setLevel(logging.CRITICAL)
+    else:
+        stream_handler.setLevel(logging.INFO)
+
 
     print(f"Loglevel: {loglevel}")
     read_excel_file(eingabedatei)
