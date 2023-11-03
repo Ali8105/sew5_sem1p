@@ -70,13 +70,12 @@ def addpasswd(user, pwd):
         logger.info("wrote password into file for user in " + file.name)
 
 def userdel(user):
-    print(user[0])
-    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "w",
+    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "a",
               encoding="utf-8") as file:
         file.write("#!/bin/bash \n")
-        for i in range(len(user)):
-            file.write(f"userdel {user[i]} && rm -rf /home/klassen/{user[i]} \n")
-            
+        file.write(f"userdel {user[0]} && rm -rf /home/klassen/{user[0]} \n")
+        print(user[0])
+
 if '__main__' == __name__:
     parser = argparse.ArgumentParser()
     output_group = parser.add_mutually_exclusive_group()
