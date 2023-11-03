@@ -20,14 +20,6 @@ __author__ = "Ali Gurbuz"
 
 
 
-def clear_list_user():
-    """
-    Diese Methode existiert nur dafür um die Inhalte von den Dateien zu löschen
-    :return:
-    """
-    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'w', encoding="utf-8") as file_user:
-        file_user.write(" ")
-
 def create_user_skript(rows):
     """
     Erstellt das Skript fuer die Erstellung von Users
