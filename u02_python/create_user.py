@@ -11,12 +11,14 @@ from openpyxl import load_workbook
 
 
 def generate_password():
+    """Generiert Passwort fur Benutzer"""
     pas_char = string.ascii_letters + "!%&(),._-=^#!%&(),._-=^#"
     logger.debug("generate password")
     return ''.join(random.choice(pas_char) for _ in range(10))
 
 
 def generate_scripts():
+    """Generiert die Skripts und iteriert uber die Benutzer"""
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\script_user.sh", "w") as file:
         logger.debug("opened file " + file.name)
         print("set -e", file=file)
@@ -40,11 +42,19 @@ def generate_scripts():
 
 
 def create_user_entry(user, pwd):
+    """
+    Schreibt eine Zeile im create- und delete script und in passwords_users fur den jeweiligen User
+
+    :param user: USer
+    :param pwd: Passwort
+    """
+
     useradd(user,pwd)
     userdel(user)
     addpasswd(user, pwd)
 
 def remove_accent(txt):
+    """Normaliziert txt [ Name ]"""
     norm_txt = unicodedata.normalize('NFD',txt)
     shaved = ''.join(c for c in norm_txt
                      if not unicodedata.combining(c))
@@ -53,6 +63,7 @@ def remove_accent(txt):
 
 
 def get_user():
+    """Generator fur User"""
     User = namedtuple("User", "vmnam nname group u_class login_name")
     for row in ws.iter_rows(min_row=2):
         firstname = remove_accent(str(row[0].value).lower())
@@ -65,10 +76,17 @@ def get_user():
 
 
 def useradd(user, pwd):
+    """Useradd in script_user.sh"""
+
+    create = f'useradd -d "/home/{user.login_name}" -c "{user.vname + " " + user.nname}" -m ' \
+             f'-g {user.group}{"," + user.u_class if user.group == "student" else ""} -s "/bin/bash {user.login_name}" && ' \
+             f'echo {user.login_name}:\"{pw}\" | chpasswd'
+
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\script_user.sh", "a") as file:
         logger.debug("opened file " + file.name)
-        file.write(f'useradd -d "/home/{user.login_name}" -c "{user.vname + " " + user.nname}" -m ' \
-             f'-g {user.group}{"," + user.u_class if user.group == "student" else ""} -s "/bin/bash {user.login_name}" ')
+        print(create, file=file)
+        logger.info("wrote useradd into " + file.name)
+
 
 def userdel(user):
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_user.sh", "a") as file:
