@@ -1,11 +1,18 @@
 import argparse
 import logging
 import re
+import string
 import unicodedata
 from collections import namedtuple
 from logging.handlers import RotatingFileHandler
 
 from openpyxl import load_workbook
+
+
+def generate_password():
+    pas_char = string.ascii_letters + "!%&(),._-=^#!%&(),._-=^#"
+
+
 
 def generate_scripts():
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\script_user.sh", "w") as file:
