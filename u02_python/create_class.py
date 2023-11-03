@@ -34,10 +34,10 @@ def generate_scripts():
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\create_class.sh", "w") as file:
         logger.debug("opened file " + file.name)
         print("set -e", file=file)
-    with open("res/delete_class.sh", "w") as file:
+    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "w") as file:
         logger.debug("opened file " + file.name)
         print("set -x", file=file)
-    open("res/passwords_class", "w").close()
+    open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_class", "w").close()
     create_user_entry(("lehrer",), ''.join(random.choice(string.ascii_letters) for _ in range(10)))
     create_user_entry(("seminar",), ''.join(random.choice(string.ascii_letters) for _ in range(10)))
     for user in get_user():
@@ -89,7 +89,7 @@ if '__main__' == __name__:
     formatter = logging.Formatter("%(asctime)s; %(levelname)s; %(message)s",
                                   "%Y-%m-%d %H:%M:%S")
 
-    rotating_file_handler = RotatingFileHandler("res/create_class.log", maxBytes=10000, backupCount=5)
+    rotating_file_handler = RotatingFileHandler(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\create_class.log", maxBytes=10000, backupCount=5)
     rotating_file_handler.setFormatter(formatter)
     logger.addHandler(rotating_file_handler)
 
