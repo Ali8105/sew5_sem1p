@@ -54,7 +54,13 @@ def create_user_entry(user, pwd):
 
 
 def useradd(user, pwd):
-    return 0
+    create = f'useradd -d /home/klassen/{"k" if user[0][0].isdigit() else ""}{user[0]} -c "{user[0]}" -m ' \
+             f'-g cdrom,plugdev,sambashare -s /bin/bash {user[0]} && ' \
+             f'echo {user[0]}:\"{pwd}\" | chpasswd'
+    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\create_class.sh", "a") as file:
+        logger.debug("opened file " + file.name)
+        print(create, file=file)
+        logger.info("wrote useradd into " + file.name)
 
 
 def addpasswd(user, pwd):
