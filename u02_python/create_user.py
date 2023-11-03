@@ -80,7 +80,11 @@ def userdel(user):
 
 
 def addpasswd(user, pwd):
-    return 0
+    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_users", "a") as file:
+        logger.debug("opened file " + file.name)
+        print(user.login_name, pwd, file=file, sep=":")
+        logger.info("wrote password into file for user in " + file.name)
+
 
 
 
