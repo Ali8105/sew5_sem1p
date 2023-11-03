@@ -7,14 +7,15 @@ from logging.handlers import RotatingFileHandler
 from openpyxl import load_workbook
 
 def generate_scripts():
-    with open("res/create_user.sh", "w") as file:
+    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\script_user.sh", "w") as file:
         logger.debug("opened file " + file.name)
         print("set -e", file=file)
-    with open("res/delete_user.sh", "w") as file:
+    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_user.sh", "w") as file:
         logger.debug("opened file " + file.name)
         print("set -x", file=file)
-    open("res/passwords_user", "w").close()
+    open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_users", "w").close()
     users = dict()
+    
 
 
 def remove_accent(txt):

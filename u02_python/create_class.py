@@ -32,7 +32,7 @@ def read_excel_file(file):
             continue
         rows.append(row)
 
-    # Löscht die Inhalte von der Datei 
+    # Löscht die Inhalte von der Datei
     clear_list_user()
     create_user_skript(rows)
 
