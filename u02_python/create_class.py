@@ -1,16 +1,8 @@
-"""
-- ein Bash-Script2 mit allen notwendigen Schritten/Befehlen zum Erzeugen der Benutzer3
-– ein Bash-Script zum Löschen der angelegten Benutzer
-– eine Liste mit Usernamen und Passwörtern zum Verteilen an die unterrichtenden Lehrer
-– ein Logfile mit sinnvollen Angaben
-"""
 import random
 import string
-import unicodedata
 import logging
 from logging.handlers import RotatingFileHandler
 from openpyxl import load_workbook
-from unicodedata import normalize
 import sys
 import argparse
 
@@ -96,6 +88,7 @@ if '__main__' == __name__:
     stream_handler = logging.StreamHandler(sys.stderr)
     stream_handler.setFormatter(formatter)
     logger.addHandler(stream_handler)
+
 
     if args.verbose:
         stream_handler.setLevel(logging.DEBUG)
