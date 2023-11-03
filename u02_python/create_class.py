@@ -4,19 +4,28 @@
 – eine Liste mit Usernamen und Passwörtern zum Verteilen an die unterrichtenden Lehrer
 – ein Logfile mit sinnvollen Angaben
 """
-import os
 import random
+import string
 import unicodedata
 import logging
 from logging.handlers import RotatingFileHandler
-
 from openpyxl import load_workbook
 from unicodedata import normalize
 import sys
 import argparse
-import numpy
 
 __author__ = "Ali Gurbuz"
+
+def generate_password(user):
+    return "null"
+
+def get_user():
+    for row in ws.iter_rows(min_row=2):
+        klasse = str(row[0].value).lower()
+        raum = str(row[1].value)
+        kv = str(row[2].value)
+        yield klasse, raum, kv
+
 
 def generate_scripts():
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\create_class.sh", "w") as file:
@@ -33,12 +42,23 @@ def generate_scripts():
         create_user_entry(user, pw)
 
 
-def create_user_entry(user, pwd)
+
+
+def create_user_entry(user, pwd):
     useradd(user, pwd)
     userdel(user)
     addpasswd(user, pwd)
 
 
+def useradd(user, pwd):
+
+def addpasswd(user, pwd):
+    def userdel(user):
+        with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "w",
+                  encoding="utf-8") as file:
+            file.write("#!/bin/bash \n")
+            for i in range(len(user)):
+                file.write(f"userdel {user[i][0]} && rm -rf /home/klassen/{user[i][0]} \n")
 
 
 def replace_umlaute(list_user):
@@ -66,16 +86,10 @@ def create_user_file(vorname, nachname, pswd):
         file_user.write(f"Vorname: {vorname} Nachname: {nachname} Passwort: {pswd} \n")
 
 
-def userdel(user):
-    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "w", encoding="utf-8") as file:
-        file.write("#!/bin/bash \n")
-        for i in range (len(user)):
-            file.write(f"userdel {user[i][0]} && rm -rf /home/klassen/{user[i][0]} \n")
 
 
 
-def parse_command_line_arguments():
-
+if '__main__' == __name__:
     parser = argparse.ArgumentParser()
     output_group = parser.add_mutually_exclusive_group()
     output_group.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
