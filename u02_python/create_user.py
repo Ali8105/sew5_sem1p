@@ -39,6 +39,12 @@ def generate_scripts():
         user = user._replace(login_name=login_name)
         create_user_entry(user,pw) # toDo
 
+
+def create_user_entry(user, pwd):
+    useradd(user,pwd)
+    userdel(user)
+    addpasswd(user, pwd)
+
 def remove_accent(txt):
     norm_txt = unicodedata.normalize('NFD',txt)
     shaved = ''.join(c for c in norm_txt
