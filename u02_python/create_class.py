@@ -32,6 +32,13 @@ def generate_scripts():
         pw = generate_password(user)
         create_user_entry(user, pw)
 
+
+def create_user_entry(user, pwd)
+    useradd(user, pwd)
+    userdel(user)
+    addpasswd(user, pwd)
+
+
 def create_user_skript(rows):
     """
     Erstellt das Skript fuer die Erstellung von Users
