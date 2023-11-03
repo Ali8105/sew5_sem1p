@@ -75,17 +75,7 @@ def userdel(user):
         file.write("#!/bin/bash \n")
         for i in range(len(user)):
             file.write(f"userdel {user[i][0]} && rm -rf /home/klassen/{user[i][0]} \n")
-
-
-
-def create_user_file(vorname, nachname, pswd):
-    with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'a', encoding="utf-8") as file_user:
-        file_user.write(f"Vorname: {vorname} Nachname: {nachname} Passwort: {pswd} \n")
-
-
-
-
-
+            
 if '__main__' == __name__:
     parser = argparse.ArgumentParser()
     output_group = parser.add_mutually_exclusive_group()
