@@ -24,6 +24,10 @@ def generate_scripts():
             login_name = re.sub(r"(\d+)", "", login_name)
             login_name += str(counter)
             counter += 1
+        users[login_name] = login_name
+        pw = generate_password() # toDo
+        user = user._replace(login_name=login_name)
+        create_user_entry(user,pw) # toDo
 
 def remove_accent(txt):
     norm_txt = unicodedata.normalize('NFD',txt)
