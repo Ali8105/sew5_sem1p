@@ -18,25 +18,7 @@ import numpy
 
 __author__ = "Ali Gurbuz"
 
-def read_excel_file(file):
-    """
 
-    :param file: Path zum File
-    :return:
-    """
-    workbook = load_workbook(file, read_only=True)
-    worksheet = workbook[workbook.sheetnames[0]]
-    rows = list()
-    first_row = True
-    for row in worksheet.iter_rows(values_only=True):
-        if first_row:
-            first_row = False
-            continue
-        rows.append(row)
-
-    # Löscht die Inhalte von der Datei
-    clear_list_user()
-    create_user_skript(rows)
 
 def clear_list_user():
     """
@@ -136,10 +118,12 @@ def parse_command_line_arguments():
     else:
         stream_handler.setLevel(logging.INFO)
 
+    try:
+        wb = load_workbook(args.file, read_only=True)
+        ws = wb[wb.sheetnames[0]]
+        generate_scripts()
+    except FileNotFoundError:
+        logger.critical("couldnt find file")
 
-    print(f"Loglevel: {loglevel}")
-    read_excel_file(eingabedatei)
 
 
-
-parse_command_line_arguments()
