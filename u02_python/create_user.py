@@ -11,7 +11,6 @@ from openpyxl import load_workbook
 
 
 def generate_password():
-    # toDo
     pas_char = string.ascii_letters + "!%&(),._-=^#!%&(),._-=^#"
     logger.debug("generate password")
     return ''.join(random.choice(pas_char) for _ in range(10))
@@ -35,9 +34,9 @@ def generate_scripts():
             login_name += str(counter)
             counter += 1
         users[login_name] = login_name
-        pw = generate_password() # toDo
+        pw = generate_password()
         user = user._replace(login_name=login_name)
-        create_user_entry(user,pw) # toDo
+        create_user_entry(user,pw)
 
 
 def create_user_entry(user, pwd):
