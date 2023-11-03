@@ -18,7 +18,19 @@ import numpy
 
 __author__ = "Ali Gurbuz"
 
-
+def generate_scripts():
+    with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\create_class.sh", "w") as file:
+        logger.debug("opened file " + file.name)
+        print("set -e", file=file)
+    with open("res/delete_class.sh", "w") as file:
+        logger.debug("opened file " + file.name)
+        print("set -x", file=file)
+    open("res/passwords_class", "w").close()
+    create_user_entry(("lehrer",), ''.join(random.choice(string.ascii_letters) for _ in range(10)))
+    create_user_entry(("seminar",), ''.join(random.choice(string.ascii_letters) for _ in range(10)))
+    for user in get_user():
+        pw = generate_password(user)
+        create_user_entry(user, pw)
 
 def create_user_skript(rows):
     """
