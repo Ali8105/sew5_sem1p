@@ -89,6 +89,7 @@ def useradd(user, pwd):
 
 
 def userdel(user):
+    """Delete Script fur delete_user.sh"""
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_user.sh", "a") as file:
         logger.debug("opened file " + file.name)
         delete = f'userdel {user.login_name} && rm -rf /home/klassen/{user.login_name}'
@@ -97,6 +98,7 @@ def userdel(user):
 
 
 def addpasswd(user, pwd):
+    """Schreibt User und Passwort in passwords_user"""
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_users", "a") as file:
         logger.debug("opened file " + file.name)
         print(user.login_name, pwd, file=file, sep=":")
