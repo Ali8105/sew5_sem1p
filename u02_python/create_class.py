@@ -32,11 +32,15 @@ def read_excel_file(file):
             continue
         rows.append(row)
 
-    # only for deleting the content of list_user
+    # Löscht die Inhalte von der Datei 
     clear_list_user()
     create_user_skript(rows)
 
 def clear_list_user():
+    """
+    Diese Methode existiert nur dafür um die Inhalte von den Dateien zu löschen
+    :return:
+    """
     with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'w', encoding="utf-8") as file_user:
         file_user.write(" ")
 
@@ -89,7 +93,6 @@ def remove_accent(list_user):
 
 
 def create_user_file(vorname, nachname, pswd):
-    # damit die einträge vom letzten mal weggehen
     with open(r"C:/Users/aligr/Desktop/Schule/5CN/SEW/sew5_sem1p/Ressources/user_list.txt", 'a', encoding="utf-8") as file_user:
         file_user.write(f"Vorname: {vorname} Nachname: {nachname} Passwort: {pswd} \n")
 
