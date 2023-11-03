@@ -1,5 +1,6 @@
 import argparse
 import logging
+import re
 import unicodedata
 from collections import namedtuple
 from logging.handlers import RotatingFileHandler
@@ -15,8 +16,14 @@ def generate_scripts():
         print("set -x", file=file)
     open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_users", "w").close()
     users = dict()
-    
-
+    for user in get_user():
+        login_name = user.nname
+        counter = 1
+        while login_name in users:
+            # Entfernt alle Zahlen im login_name
+            login_name = re.sub(r"(\d+)", "", login_name)
+            login_name += str(counter)
+            counter += 1
 
 def remove_accent(txt):
     norm_txt = unicodedata.normalize('NFD',txt)
