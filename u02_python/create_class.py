@@ -25,10 +25,10 @@ def get_user():
 def generate_scripts():
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\create_class.sh", "w") as file:
         logger.debug("opened file " + file.name)
-        print("", file=file)
+        print("#!/bin/bash \n", file=file)
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "w") as file:
         logger.debug("opened file " + file.name)
-        print("", file=file)
+        print("#!/bin/bash  \n", file=file)
     open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_class", "w").close()
     create_user_entry(("lehrer",), ''.join(random.choice(string.ascii_letters) for _ in range(10)))
     create_user_entry(("seminar",), ''.join(random.choice(string.ascii_letters) for _ in range(10)))
@@ -64,7 +64,6 @@ def addpasswd(user, pwd):
 def userdel(user):
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "a",
               encoding="utf-8") as file:
-        file.write("#!/bin/bash \n")
         file.write(f"userdel {user[0]} && rm -rf /home/klassen/{user[0]} \n")
         print(user[0])
 
