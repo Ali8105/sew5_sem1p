@@ -80,7 +80,7 @@ def useradd(user, pwd):
 
     create = f'useradd -d "/home/{user.login_name}" -c "{user.vname + " " + user.nname}" -m ' \
              f'-g {user.group}{"," + user.u_class if user.group == "student" else ""} -s "/bin/bash {user.login_name}" && ' \
-             f'echo {user.login_name}:\"{pw}\" | chpasswd'
+             f'echo {user.login_name}:\"{pwd}\" | chpasswd'
 
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\script_user.sh", "a") as file:
         logger.debug("opened file " + file.name)
@@ -120,7 +120,7 @@ if '__main__' == __name__:
     formatter = logging.Formatter("%(asctime)s; %(levelname)s; %(message)s",
                                   "%Y-%m-%d %H:%M:%S")
 
-    rotating_file_handler = RotatingFileHandler("res/logs/create_user.log", maxBytes=10000, backupCount=5)
+    rotating_file_handler = RotatingFileHandler(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\create_user.log", maxBytes=10000, backupCount=5)
     rotating_file_handler.setFormatter(formatter)
     logger.addHandler(rotating_file_handler)
 
