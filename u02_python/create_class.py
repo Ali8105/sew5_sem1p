@@ -25,10 +25,10 @@ def get_user():
 def generate_scripts():
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\create_class.sh", "w") as file:
         logger.debug("opened file " + file.name)
-        print("set -e", file=file)
+        print("", file=file)
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "w") as file:
         logger.debug("opened file " + file.name)
-        print("set -x", file=file)
+        print("", file=file)
     open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_class", "w").close()
     create_user_entry(("lehrer",), ''.join(random.choice(string.ascii_letters) for _ in range(10)))
     create_user_entry(("seminar",), ''.join(random.choice(string.ascii_letters) for _ in range(10)))
@@ -92,9 +92,12 @@ if '__main__' == __name__:
 
     if args.verbose:
         stream_handler.setLevel(logging.DEBUG)
+        logger.setLevel(logging.DEBUG)
     elif args.quiet:
         stream_handler.setLevel(logging.CRITICAL)
+        logger.setLevel(logging.Critical)
     else:
+        logger.setLevel(logging.INFO)
         stream_handler.setLevel(logging.INFO)
 
     try:
