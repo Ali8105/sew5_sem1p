@@ -115,7 +115,7 @@ if '__main__' == __name__:
     parser.add_argument("file", help="file with the userdata")
     args = parser.parse_args()
 
-    logger = logging.Logger()
+    logger = logging.getLogger()
 
     formatter = logging.Formatter("%(asctime)s; %(levelname)s; %(message)s",
                                   "%Y-%m-%d %H:%M:%S")
