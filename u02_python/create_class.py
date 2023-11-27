@@ -81,10 +81,9 @@ def useradd(user, pwd):
 
 def addpasswd(user, pwd):
     """
-
-    :param user:
-    :param pwd:
-    :return:
+    schreibt die Passwörter für die User in die Datei passwords_class
+    :param user: User
+    :param pwd: Passwort
     """
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_class", "a") as file:
         logger.debug("opened file " + file.name)
