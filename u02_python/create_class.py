@@ -9,10 +9,17 @@ import argparse
 __author__ = "Ali Gurbuz"
 
 def generate_password(user):
+    """
+    generiert Passwort fur param User
+    :param user:  user
+    :return: Passwort
+    """
+    # Sonderzeichen für Passwort
     special_chars = "!%&(),._-=^#!%&(),._-=^#"
+    # Debug generated Password
     logger.debug("generated password")
-    return f'{user[0]}{random.choice(special_chars)}{user[1]}' \
-           f'{random.choice(special_chars)}{user[2]}'
+
+    return f'{user[0]}{random.choice(special_chars)}{user[1]}{random.choice(special_chars)}{user[2]}'
 
 def get_user():
     for row in ws.iter_rows(min_row=2):
