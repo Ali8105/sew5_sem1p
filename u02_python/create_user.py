@@ -45,7 +45,6 @@ def generate_scripts():
 def create_user_entry(user, pwd):
     """
     Schreibt eine Zeile im create- und delete script und in passwords_users fur den jeweiligen User
-
     :param user: USer
     :param pwd: Passwort
     """
@@ -55,7 +54,10 @@ def create_user_entry(user, pwd):
     addpasswd(user, pwd)
 
 def remove_accent(txt):
-    """Normaliziert txt [ Name ]"""
+    """
+    Normaliziert txt
+    :param txt = Namen
+    """
     norm_txt = unicodedata.normalize('NFD',txt)
     shaved = ''.join(c for c in norm_txt
                      if not unicodedata.combining(c))
