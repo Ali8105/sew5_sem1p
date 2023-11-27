@@ -16,7 +16,6 @@ def generate_password(user):
     """
     special_chars = "!%&(),._-=^#!%&(),._-=^#"
     logger.debug("generated password")
-
     return f'{user[0]}{random.choice(special_chars)}{user[1]}{random.choice(special_chars)}{user[2]}'
 
 def get_user():
@@ -31,6 +30,10 @@ def get_user():
 
 
 def generate_scripts():
+    """
+    Überschreibt zuerst create_class, delete_class und passwords_class
+    erstellt User mit Passwort
+    """
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\create_class.sh", "w") as file:
         logger.debug("opened file " + file.name)
         print("#!/bin/bash \n", file=file)
@@ -38,8 +41,11 @@ def generate_scripts():
         logger.debug("opened file " + file.name)
         print("#!/bin/bash  \n", file=file)
     open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_class", "w").close()
+    # User lehrer wird erstellt
     create_user_entry(("lehrer",), ''.join(random.choice(string.ascii_letters) for _ in range(10)))
+    # User Seminar wird erstellt
     create_user_entry(("seminar",), ''.join(random.choice(string.ascii_letters) for _ in range(10)))
+    # iteriert über alle Einträge bzw. User
     for user in get_user():
         pw = generate_password(user)
         create_user_entry(user, pw)
@@ -48,12 +54,22 @@ def generate_scripts():
 
 
 def create_user_entry(user, pwd):
+    """
+    Schreibt in die Dateien die notwendigen Informationen
+    :param user: User
+    :param pwd: PAsswort
+    """
     useradd(user, pwd)
     userdel(user)
     addpasswd(user, pwd)
 
 
 def useradd(user, pwd):
+    """
+    Erstellt create_class.sh
+    :param user: User
+    :param pwd:  Passwort
+    """
     create = f'useradd -d /home/klassen/{"k" if user[0][0].isdigit() else ""}{user[0]} -c "{user[0]}" -m ' \
              f'-g cdrom,plugdev,sambashare -s /bin/bash {user[0]} && ' \
              f'echo {user[0]}:\"{pwd}\" | chpasswd'
