@@ -14,14 +14,15 @@ def generate_password(user):
     :param user:  user
     :return: Passwort
     """
-    # Sonderzeichen für Passwort
     special_chars = "!%&(),._-=^#!%&(),._-=^#"
-    # Debug generated Password
     logger.debug("generated password")
 
     return f'{user[0]}{random.choice(special_chars)}{user[1]}{random.choice(special_chars)}{user[2]}'
 
 def get_user():
+    """
+    Liest das file ab der 2.ten Zeile und findet alle Klassen samt raum und KV
+    """
     for row in ws.iter_rows(min_row=2):
         klasse = str(row[0].value).lower()
         raum = str(row[1].value)
@@ -63,16 +64,26 @@ def useradd(user, pwd):
 
 
 def addpasswd(user, pwd):
+    """
+
+    :param user:
+    :param pwd:
+    :return:
+    """
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_class", "a") as file:
         logger.debug("opened file " + file.name)
         print(user[0], pwd, file=file, sep=":")
         logger.info("wrote password into file for user in " + file.name)
 
+
 def userdel(user):
+    """
+    Methode um delete_class.sh zu beschreiben
+    :param user: User
+    """
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\delete_class.sh", "a",
               encoding="utf-8") as file:
         file.write(f"userdel {user[0]} && rm -rf /home/klassen/{user[0]} \n")
-        print(user[0])
 
 if '__main__' == __name__:
     parser = argparse.ArgumentParser()
