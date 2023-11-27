@@ -9,6 +9,7 @@ from logging.handlers import RotatingFileHandler
 
 from openpyxl import load_workbook
 
+__author__ = "Ali Gurbuz"
 
 def generate_password():
     """Generiert Passwort fur Benutzer"""
