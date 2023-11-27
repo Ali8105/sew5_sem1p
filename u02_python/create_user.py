@@ -26,6 +26,7 @@ def generate_scripts():
         logger.debug("opened file " + file.name)
         print("#!/bin/bash  \n", file=file)
     open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_users", "w").close()
+    # fur mehrere selbe Loginnamen
     users = dict()
     for user in get_user():
         login_name = user.nname
