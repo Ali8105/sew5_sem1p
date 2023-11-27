@@ -78,6 +78,12 @@ def get_user():
 
 def useradd(user, pwd):
     """Useradd in script_user.sh"""
+
+    # -d home Directory
+    # -c Kommentar | Full Name
+    # -m Benutzerverzeichnis
+    # -g Hauptbenutzer falls Gruppe Stundets unter Gruppe Klasse
+    # -s Standart Shell
     create = f'useradd -d "/home/{user.login_name}" -c "{user.vname + " " + user.nname}" -m ' \
              f'-g {user.group}{"," + user.u_class if user.group == "student" else ""} -s "/bin/bash {user.login_name}" && ' \
              f'echo {user.login_name}:\"{pwd}\" | chpasswd'
