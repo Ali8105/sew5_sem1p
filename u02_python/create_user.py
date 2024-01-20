@@ -9,6 +9,11 @@ from logging.handlers import RotatingFileHandler
 
 from openpyxl import load_workbook
 
+
+# toDo: Excel-Liste
+#       unique Passwort
+
+
 __author__ = "Ali Gurbuz"
 
 def generate_password():
@@ -105,14 +110,14 @@ def userdel(user):
         file.write(delete)
         logger.info("wrote userdel into " + file.name)
 
-
+passworter = list()
 def addpasswd(user, pwd):
     """Schreibt User und Passwort in passwords_user"""
     with open(r"C:\Users\aligr\Desktop\Schule\5CN\SEW\sew5_sem1p\Ressources\passwords_users", "a") as file:
         logger.debug("opened file " + file.name)
         print(user.login_name, pwd, file=file, sep=":")
         logger.info("wrote password into file for user in " + file.name)
-
+        while passworter.__contains__()
 
 
 

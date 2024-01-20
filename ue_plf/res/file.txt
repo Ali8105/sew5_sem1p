@@ -1,0 +1,4 @@
+Schüler; Klasse; Schuljahr; Ergebnis;
+Ali; 5CN; 2023/24; 100%
+Can; 4CN; 2021/24; 90%
+
