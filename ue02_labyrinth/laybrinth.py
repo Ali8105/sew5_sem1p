@@ -14,12 +14,15 @@ def path_search(laby, posX, posY):
         print(laby)
         return 0
     else:
-        return 1
-        #laby[posX][posY] = '*'
-        #if laby[posX+1][posY] != '#':
-        #    path_search(laby,posX+1,posY)
-        #if laby[posX][posY+1] != '#':
-        #    path_search(laby,posX,posY+1)
+        laby[posX][posY] = '*'
+        if laby[posX+1][posY] != '#':
+            path_search(laby,posX+1,posY)
+        if laby[posX][posY+1] != '#':
+            path_search(laby,posX,posY+1)
+        if laby[posX-1][posY] != '#':
+            path_search(laby,posX-1,posY)
+        if laby[posX][posY-1] != '#':
+            path_search(laby,posX,posY-1)
 
 
 if __name__ == '__main__':
