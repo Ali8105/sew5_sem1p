@@ -2,12 +2,11 @@ __author__ = "Ali Gürbüz"
 
 
 def read_labyrinth(file, posX, posY):
+    labyrinth = []
     with open(file,"r") as file_read:
-        counter = 0
-        for line in file_read.readline():
-            laby[counter] = line
-            counter += 1
-    path_search(laby,posX,posY)
+        for line in file_read:
+            labyrinth.append(line.strip())
+    print(labyrinth)
 
 def path_search(laby, posX, posY):
 
