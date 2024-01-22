@@ -29,18 +29,23 @@ def path_search(laby, posX, posY):
 def print_path(laby):
     print('---------------------------------')
     for i in laby:
-        print(i)
+        for j in i:
+            print(j, end=" ")
+        print("")
     print('---------------------------------')
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description="die Wege")
+    parser = argparse.ArgumentParser(description="Paths")
     parser.add_argument("filename", help="File containing the labyrinth to solve")
     parser.add_argument("-x", "--xstart", type=int, help="X-coordinate to start")
     parser.add_argument("-y", "--ystart", type=int, help="Y-coordinate to start")
     return parser.parse_args()
 
 if __name__ == '__main__':
-    file = r"l3.txt"
-    read_labyrinth(file,0,5)
+    args = parse_arguments()
+    file = args.filename
+    x_start = args.xstart if args.xstart else 0
+    y_start = args.ystart if args.ystart else 0
+    read_labyrinth(file, x_start, y_start)
 
