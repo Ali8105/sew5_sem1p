@@ -1,5 +1,7 @@
 __author__ = "Ali Gürbüz"
 
+import argparse
+
 
 def read_labyrinth(file, posX, posY):
     laby = []
@@ -9,8 +11,6 @@ def read_labyrinth(file, posX, posY):
     path_search(laby,posX,posY)
 
 def path_search(laby, posX, posY):
-    # Rekursion Break-out
-       # print_path(laby)
     if posX < 0 or posY < 0 or posX > len(laby)-1 or posY > len(laby[0])-1:
         return 0
     elif laby[posX][posY] == 'A':
@@ -25,13 +25,20 @@ def path_search(laby, posX, posY):
             path_search(laby,posX-1,posY)
         if laby[posX][posY-1] == ' ' or  laby[posX][posY-1] == 'A':
             path_search(laby,posX,posY-1)
-        #print_path(laby)
 
 def print_path(laby):
     print('---------------------------------')
     for i in laby:
         print(i)
     print('---------------------------------')
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="die Wege")
+    parser.add_argument("filename", help="File containing the labyrinth to solve")
+    parser.add_argument("-x", "--xstart", type=int, help="X-coordinate to start")
+    parser.add_argument("-y", "--ystart", type=int, help="Y-coordinate to start")
+    return parser.parse_args()
 
 if __name__ == '__main__':
     file = r"l3.txt"
